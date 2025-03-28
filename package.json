@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Yoann04/QuaiAntiqueFront/issues"
   },
-  "homepage": "https://github.com/Yoann04/QuaiAntiqueFront#readme"
+  "homepage": "https://github.com/Yoann04/QuaiAntiqueFront#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
 }
