@@ -1,0 +1,20 @@
+{
+  "name": "quaiantiquefront",
+  "version": "1.0.0",
+  "description": "Ce site est un site vitrine pour le restaurant Quai Antique",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yoann04/QuaiAntiqueFront.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yoann04/QuaiAntiqueFront/issues"
+  },
+  "homepage": "https://github.com/Yoann04/QuaiAntiqueFront#readme"
+}
