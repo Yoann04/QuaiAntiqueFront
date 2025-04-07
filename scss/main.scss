@@ -7,7 +7,7 @@ html{
 }
 
 main{
-    margin-bottom: 250px;
+    margin-bottom: 270px;
 }
 
 footer.footer{
@@ -19,6 +19,7 @@ footer.footer{
 
 .hero-scene{
 position: relative;
+margin-bottom: 15px;
 &::before{
     content:"";
     position: absolute;
@@ -72,4 +73,16 @@ img{
 opacity: 0;
 transition: all 0.3s;
     }
+}
+
+.form-label{
+    color: $primary;
+}
+
+.allreservations{
+  a{
+    display: block;
+    color: $black;
+    padding:10px;
+  }
 }
