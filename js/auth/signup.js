@@ -111,7 +111,7 @@ let dataForm = new FormData(formInscription);
   redirect: "follow"
 };
 
-fetch("http://127.0.0.1:8000/api/registration", requestOptions)
+fetch(apiUrl+"registration", requestOptions)
   .then(response => {
     if(response.ok){
     return response.json();
