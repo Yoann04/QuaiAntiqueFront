@@ -1,24 +1,25 @@
-on : push
-name: 🚀 Deploy website on push
-jobs:
-  web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-   
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ssh-qauiantiquerestaurant.alwaysdata.net
-        username: qauiantiquerestaurant
-        password: ${{ secrets.ftp_password }}
-        server-dir: /www/
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/bootstrap/scss/**
-          **/node_modules/bootstrap/js/**
-          **/node_modules/bootstrap-icons/icons/**  
+name: 🚀 Déploiement SFTP vers AlwaysData
 
+on:
+  push:
+    branches:
+      - main  # ou remplace par ta branche, ex: 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Récupération du code
+        uses: actions/checkout@v3
+
+      - name: 🚀 Envoi sur AlwaysData
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ssh-qauiantiquerestaurant.alwaysdata.net
+          username: qauiantiquerestaurant
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          local_path: ./
+          remote_path: /www/
+          sftp_only: true
