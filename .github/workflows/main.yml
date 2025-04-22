@@ -20,4 +20,4 @@ jobs:
           **/node_modules/bootstrap/scss/**
           **/node_modules/bootstrap/js/**
           **/node_modules/bootstrap-icons/icons/**  
-        server-dir: /home/qauiantiquerestaurant/
+        server-dir: /www/
