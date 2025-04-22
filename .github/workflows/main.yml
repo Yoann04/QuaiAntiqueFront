@@ -3,7 +3,7 @@ name: 🚀 Déploiement SFTP vers AlwaysData
 on:
   push:
     branches:
-      - main  # ou remplace par ta branche, ex: 'master'
+      - main
 
 jobs:
   deploy:
@@ -23,3 +23,4 @@ jobs:
           local_path: ./
           remote_path: /www/
           sftp_only: true
+          delete_remote_files: false
