@@ -1,27 +1,23 @@
-on : push
+on: push
 name: 🚀 Deploy website on push
+
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 SFTP Deploy
     runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
-   
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ftp-qauiantiquerestaurant.alwaysdata.net
-        username: qauiantiquerestaurant
-        password: ${{ secrets.ftp_password }}
-        protocol: ftps
-        port: 21
-        args: --timeout=60000
 
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/bootstrap/scss/**
-          **/node_modules/bootstrap/js/**
-          **/node_modules/bootstrap-icons/icons/**  
-        server-dir: /www/
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 📂 Sync files via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ftp-qauiantiquerestaurant.alwaysdata.net
+          username: qauiantiquerestaurant
+          password: ${{ secrets.ftp_password }}
+          port: 22
+          local_path: ./
+          remote_path: /www/
+          sftp_only: true
+          args: "-o ConnectTimeout=30"
