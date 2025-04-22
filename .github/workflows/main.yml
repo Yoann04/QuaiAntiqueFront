@@ -2,7 +2,7 @@ on : push
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
-    name: 🎉 SFTP Deploy
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -16,6 +16,8 @@ jobs:
         password: ${{ secrets.ftp_password }}
         protocol: ftps
         port: 21
+        args: --timeout=60000
+
         exclude: |
           **/.git*
           **/.git*/**
