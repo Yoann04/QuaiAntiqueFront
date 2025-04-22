@@ -1,15 +1,13 @@
 on: push
 name: 🚀 Déployer via SFTP
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: 📦 Checkout code
         uses: actions/checkout@v3
 
-      - name: 🚀 Deploy to AlwaysData via SFTP
+      - name: 🚀 Deploy with SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ssh-qauiantiquerestaurant.alwaysdata.net
@@ -20,3 +18,4 @@ jobs:
           remote_path: /www/
           sftp_only: true
           delete_remote_files: false
+
