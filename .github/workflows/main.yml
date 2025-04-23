@@ -20,12 +20,18 @@ jobs:
           username: projetquaiantiquerestaurant
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          secure: true
           server-dir: www/
           local-dir: ./
           exclude: |
-            **/.git*
-            **/.github*
-            **/node_modules/*
-            **/package*.json
-            **/*.scss
+            .git*
+            **/.git/**
+            .vscode/**
+            .github/**
+            node_modules/**
+            *.scss
+            *.map
+            package*.json
+            README.md
+            .DS_Store
+            .ftp-deploy-sync-state.json
+          dangerous-clean-slate: true
