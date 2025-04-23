@@ -17,7 +17,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp-projetquaiantiquerestaurant.alwaysdata.net
-          username: iantiquerestaurant@ftp-projetquaiantiquerestaurant.alwaysdata.net
+          username: projetquaiantiquerestaurant
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: www/
           local-dir: ./
