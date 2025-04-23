@@ -3,7 +3,7 @@ name: 🚀 Deploy Website on Push
 on:
   push:
     branches:
-      - main  # Remplace par la branche de ton choix (par exemple 'main' ou 'master')
+      - main
 
 jobs:
   deploy:
@@ -26,10 +26,11 @@ jobs:
           server: ftp-projetquaiantiquerestaurant.alwaysdata.net
           username: projetquaiantiquerestaurant
           password: ${{ secrets.ftp_password }}
-          protocol: ftps   # Assure-toi que le serveur prend en charge FTPS
-          port: 21          # Port FTPS
-          timeout: 300       # Timeout augmenté pour éviter les erreurs
-          server-dir: /www/  # Répertoire cible sur ton serveur
+          protocol: ftps   # Essaye aussi "sftp" si FTPS continue à poser problème
+          port: 21          # Utilise 22 pour SFTP si nécessaire
+          timeout: 600       # Timeout augmenté pour éviter la déconnexion prématurée
+          security: true     # Option pour sécuriser la connexion
+          server-dir: /www/
           exclude: |
             **/.git*
             **/.git*/**
@@ -40,4 +41,3 @@ jobs:
 
       - name: 🎉 Deployment complete
         run: echo "Deployment successful!"
-
