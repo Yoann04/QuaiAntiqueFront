@@ -1,4 +1,4 @@
-name: 🚀 Déploiement SFTP vers AlwaysData
+name: Build & Deploy
 
 on:
   push:
@@ -6,21 +6,31 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Récupération du code
-        uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
-      - name: 🚀 Envoi sur AlwaysData
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
-          server: ssh-qauiantiquerestaurant.alwaysdata.net
-          username: qauiantiquerestaurant
-          password: ${{ secrets.SFTP_PASSWORD }}
+          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
           port: 22
-          local_path: ./
-          remote_path: ./
-          sftp_only: true
-          verbose: true
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: ./dist
+          remote_path: ./public_html/
+
