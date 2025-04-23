@@ -21,8 +21,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      # - name: Build
+      #   run: npm run build  # Étape supprimée car inutile pour un site statique
 
       - name: Deploy to SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
@@ -31,6 +31,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           port: 22
           password: ${{ secrets.FTP_PASSWORD }}
-          local_path: ./dist
+          local_path: ./  # Chemin racine de ton site
           remote_path: ./public_html/
-
