@@ -19,5 +19,6 @@
   "homepage": "https://github.com/Yoann04/QuaiAntiqueFront#readme",
   "dependencies": {
     "bootstrap": "^5.3.3"
-  }
+  },
+  "devDependencies": {}
 }
