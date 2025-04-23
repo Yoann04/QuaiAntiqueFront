@@ -3,22 +3,24 @@ name: Deploy to AlwaysData
 on:
   push:
     branches:
-      - main  # change "main" si ta branche s'appelle "master" ou autre
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Récupérer le code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Déployer sur AlwaysData via FTP
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp-projetquaiantiquerestaurant.alwaysdata.net
           username: projetquaiantiquerestaurant
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          secure: true
           server-dir: www/
           local-dir: ./
           exclude: |
