@@ -16,7 +16,7 @@ jobs:
       - name: Déployer sur AlwaysData via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.alwaysdata.com
+          server: ftp-projetquaiantiquerestaurant.alwaysdata.net
           username: iantiquerestaurant@ftp-projetquaiantiquerestaurant.alwaysdata.net
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: www/
