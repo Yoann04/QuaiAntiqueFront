@@ -1,24 +1,43 @@
-on: push
-name: 🚀 Deploy website on push
+name: 🚀 Deploy Website on Push
+
+on:
+  push:
+    branches:
+      - main  # Remplace par la branche de ton choix (par exemple 'main' ou 'master')
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy:
+    name: 🎉 Deploy Website via FTP/FTPS
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ftp-projetquaiantiquerestaurant.alwaysdata.net
-        username: projetquaiantiquerestaurant
-        password: ${{ secrets.ftp_password }}
-        protocol: ftps
-        server-dir: /www/
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/bootstrap/scss/**
-          **/node_modules/bootstrap/js/**
-          **/node_modules/bootstrap-icons/icons/**  
+      - name: 🚚 Checkout latest code
+        uses: actions/checkout@v4
+
+      - name: 🔑 Setup FTP credentials
+        env:
+          FTP_PASSWORD: ${{ secrets.ftp_password }}
+        run: |
+          echo "FTP_PASSWORD is set"
+
+      - name: 📂 Sync files to server via FTPS (Secure FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp-projetquaiantiquerestaurant.alwaysdata.net
+          username: projetquaiantiquerestaurant
+          password: ${{ secrets.ftp_password }}
+          protocol: ftps   # Assure-toi que le serveur prend en charge FTPS
+          port: 21          # Port FTPS
+          timeout: 300       # Timeout augmenté pour éviter les erreurs
+          server-dir: /www/  # Répertoire cible sur ton serveur
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/node_modules/bootstrap/scss/**
+            **/node_modules/bootstrap/js/**
+            **/node_modules/bootstrap-icons/icons/**
+
+      - name: 🎉 Deployment complete
+        run: echo "Deployment successful!"
+
