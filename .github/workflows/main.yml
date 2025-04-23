@@ -1,43 +1,29 @@
-name: 🚀 Deploy Website on Push
+name: Deploy to AlwaysData
 
 on:
   push:
     branches:
-      - main
+      - main  # change "main" si ta branche s'appelle "master" ou autre
 
 jobs:
   deploy:
-    name: 🎉 Deploy Website via FTP/FTPS
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚚 Checkout latest code
-        uses: actions/checkout@v4
+      - name: Récupérer le code
+        uses: actions/checkout@v3
 
-      - name: 🔑 Setup FTP credentials
-        env:
-          FTP_PASSWORD: ${{ secrets.ftp_password }}
-        run: |
-          echo "FTP_PASSWORD is set"
-
-      - name: 📂 Sync files to server via FTPS (Secure FTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Déployer sur AlwaysData via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp-projetquaiantiquerestaurant.alwaysdata.net
-          username: projetquaiantiquerestaurant
-          password: ${{ secrets.ftp_password }}
-          protocol: ftps   # Essaye aussi "sftp" si FTPS continue à poser problème
-          port: 21          # Utilise 22 pour SFTP si nécessaire
-          timeout: 600       # Timeout augmenté pour éviter la déconnexion prématurée
-          security: true     # Option pour sécuriser la connexion
-          server-dir: /www/
+          server: ftp.alwaysdata.com
+          username: iantiquerestaurant@ftp-projetquaiantiquerestaurant.alwaysdata.net
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: www/
+          local-dir: ./
           exclude: |
             **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/node_modules/bootstrap/scss/**
-            **/node_modules/bootstrap/js/**
-            **/node_modules/bootstrap-icons/icons/**
-
-      - name: 🎉 Deployment complete
-        run: echo "Deployment successful!"
+            **/.github*
+            **/node_modules/*
+            **/package*.json
+            **/*.scss
