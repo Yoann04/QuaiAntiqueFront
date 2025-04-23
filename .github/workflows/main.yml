@@ -1,0 +1,26 @@
+name: 🚀 Déploiement SFTP vers AlwaysData
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Récupération du code
+        uses: actions/checkout@v3
+
+      - name: 🚀 Envoi sur AlwaysData
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ssh-qauiantiquerestaurant.alwaysdata.net
+          username: qauiantiquerestaurant
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          local_path: ./
+          remote_path: ./
+          sftp_only: true
+          verbose: true
